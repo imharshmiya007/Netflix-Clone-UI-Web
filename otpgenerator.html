@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firebase OTP Generator</title>
+
+</head>
+<body>
+
+    <form>
+      <label for="PhoneNumber">Phone Number:</label><br>
+      <input type="text" id="PhoneNumber" name="PhoneNumber" required><br>
+      <div id="recaptcha-container"></div><br>
+      <button type="button" onclick="sendOTP()">Send OTP</button>
+    </form>
+
+    <script>
+      document.getElementById("PhoneNumber").value = localStorage.getItem("email");
+    </script>
+    
+
+    <!-- Include Firebase library -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    
+    <script>
+
+        function sendOTP() 
+        {
+          var PhoneNumber = document.getElementById("PhoneNumber").value;
+
+          var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+          firebase.auth().signInWithPhoneNumber(PhoneNumber, appVerifier)
+            .then(function (confirmationResult) 
+            {
+                  // OTP sent successfully
+                var code = prompt("Enter OTP:");
+                return confirmationResult.confirm(code);
+            })
+            .then(function (result) {
+                  // Phone number verified successfully
+                alert("Phone number verified.");
+            })
+            .catch(function (error) {
+                  // An error occurred
+                console.error("Error sending OTP:", error);
+                alert("Failed to send OTP. Please try again later.");
+            });
+        }
+
+    </script>
+ 
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+      
+      const firebaseConfig = {
+  apiKey: "AIzaSyC_TBPZFubdDn3yF368DGdsliae2V-cqx8",
+  authDomain: "otpgen2-5e1ce.firebaseapp.com",
+  projectId: "otpgen2-5e1ce",
+  storageBucket: "otpgen2-5e1ce.appspot.com",
+  messagingSenderId: "600822908562",
+  appId: "1:600822908562:web:8f1b246894b93b8177484b"
+};
+      firebase.initializeApp(firebaseConfig);
+
+      // Handle form submission
+      document.getElementById("otpForm").addEventListener("submit", function(event) 
+      {
+        event.preventDefault();
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        generateOTP(PhoneNumber);
+      });
+    </script>
+</body>
+
+</body>
+</html>

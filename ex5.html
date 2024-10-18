@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh's Privet Netflix</title>
+    <link rel="icon" type="image/ico" href="Netflix Logo Icon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth-compat.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('netflix-india.WEBP');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+
+        .container-custom {
+            width: 450px ;
+            min-height: 680px;
+            margin: 35px auto;
+            padding: 45px 68px;
+            background-color: rgba(4, 0, 0, 0.8);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .bottom-custom {
+            width: 100%;
+            min-height: 220px;
+            margin: 50px auto 0;
+            padding: 45px 68px;
+            background-color: rgba(4, 0, 0, 0.8);
+            border-radius: 4px;
+            border-top: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-text-white {
+            color: #fff;
+        }
+
+        .custom-text-muted {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        #lang-img {
+            
+            width: 14px;
+            height: 12px;
+        }
+        .lang-img-class {
+            margin-top: 1.3%;
+            margin-left: -67%;
+            width: 10%;
+            height: 10%;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="text-center mb-4">
+        <img src="Logonetflix.png" alt="Example PNG Image" class="lang-img-class mr-2">
+    </div>
+
+    <div class="container-custom">
+        <h1 class="custom-text-white">Sign In</h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email" class="custom-text-white">Email or phone number</label>
+                <input type="text" class="form-control" id="email123" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="password" class="custom-text-white">Password</label>
+                <input type="password" class="form-control" id="password123" minlength="4" maxlength="60" placeholder="">
+            </div>
+            <button onclick="signin()" id="submit-btn" type="submit" class="btn btn-danger btn-block">Sign In</button>
+            <p class="text-center custom-text-muted mt-3">OR</p>
+            <a href="sign-in-code.html" class="btn btn-secondary btn-block">Use a sign-in code</a>
+            <p class="text-center mt-3"><a href="resetpassword.html" class="custom-text-white">Forgot password?</a></p>
+            <div class="form-check custom-text-white">
+                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            <p class="mt-3">New to Netflix? <a href="signuppage.html" class="custom-text-white">Sign up now.</a></p>
+        </form>
+        <div class="captcha mt-3 custom-text-muted">
+            This page is protected by Google reCAPTCHA to ensure you're not a bot.
+            <p id="moreText" class="d-none">The information collected by Google reCAPTCHA is subject to the Google
+                <a href="https://policies.Google.com/privacy" class="custom-text-white">Privacy Policy</a> and
+                <a href="https://policies.Google.com/terms" class="custom-text-white">Terms of Service</a>,
+                and is used for providing, maintaining, and improving the reCAPTCHA service and for
+                general security purposes (it is not used for personalised advertising by Google).</p>
+            <a href="#" id="learnMoreBtn" class="custom-text-white">Learn more</a>
+        </div>
+    </div>
+
+    <div class="bottom-custom text-center">
+        <p id="call" class="custom-text-muted">Questions? Call <a href="tel:+91 81 28 04 01 01" class="custom-text-muted">+91 81280 40101</a></p>
+        <a href="https://help.netflix.com/support/412" class="custom-text-muted">FAQ</a>
+        <a href="https://help.netflix.com" class="custom-text-muted ml-3">Help Center</a>
+        <a href="https://help.netflix.com/legal/termsofuse" class="custom-text-muted ml-3">Terms Of Use</a>
+        <a href="https://help.netflix.com/legal/privacy" class="custom-text-muted ml-3">Privacy</a>
+        <a href="https://www.netflix.com/login?nextpage=https%3A%2F%2Fwww.netflix.com%2Fbrowse#" class="custom-text-muted ml-3">Cookie Preferences</a>
+        <a href="https://help.netflix.com/legal/corpinfo" class="custom-text-muted ml-3">Corporate Information</a>
+        <p id="lang" class="custom-text-muted mt-4">
+            <img src="lang button.png" alt="Language Selector" id="lang-img" class="mr-2">
+            <select id="language-select" class="custom-select d-inline w-auto">
+                <option value="en" selected>English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="gu">ગુજરાતી</option>
+            </select>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email123').value;
+            const password = document.getElementById('password123').value;
+
+            if (email.length === 0 || password.length === 0) {
+                alert('Email or password are required.');
+                return;
+            }
+            // Perform form validation and submit the form using AJAX or Fetch API
+        });
+
+        document.getElementById("learnMoreBtn").addEventListener("click", function (event) {
+            event.preventDefault();
+            var moreText = document.getElementById("moreText");
+
+            if (moreText.classList.contains("d-none")) {
+                moreText.classList.remove("d-none");
+                this.textContent = "Show less";
+            } else {
+                moreText.classList.add("d-none");
+                this.textContent = "Learn more";
+            }
+        });
+    </script>
+</body>
+
+</html>

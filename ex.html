@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firebase OTP Generator</title>
+
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  margin-top: 200px;
+  margin-left: 150px;
+  /* margin-right: 10px; */
+  width: 10px;
+}
+
+.blur{
+    display: block;
+    border: 1px solid #b91717;
+    border-radius: 5px;
+    width: 300px;
+    height: 100px;
+    /* margin-top: 10px; */
+    
+}
+
+.plans-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  text-align: center;
+}
+
+.plan {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 130px;
+  height: 200px;
+  width: 50px;
+  margin: 5px;
+  /* flex: 1 0 200px; */
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.selected-plan {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+</style>
+
+</head>
+<body>
+
+    <div class="plans-container">
+        <div class="plan" data-price="149" data-resolution="480p">
+            <div class="blur">
+
+            </div>
+            <!-- Plan content -->
+        </div>
+            <!-- Repeat for other plans -->
+        <div class="plan" data-price="149" data-resolution="480p">
+            <!-- Selected plan content -->
+        </div>
+        <div class="plan" data-price="149" data-resolution="480p">
+            <!-- Plan content -->
+        </div>
+            <!-- Repeat for other plans -->
+        <div class="plan" data-price="149" data-resolution="480p">
+            <!-- Selected plan content -->
+        </div>
+    </div>
+    <script>
+
+const plans = document.querySelectorAll('.plan');
+const selectedPlan = document.querySelector('.selected-plan');
+
+plans.forEach(plan => {
+  plan.addEventListener('click', () => {
+    // Clear the selected-plan content
+    selectedPlan.innerHTML = '';
+
+    // Copy the plan content to the selected-plan section
+    const planName = plan.querySelector('h3').innerText;
+    const planPrice = plan.querySelector('p:nth-child(3)').innerText;
+    const planResolution = plan.querySelector('p:nth-child(2)').innerText;
+
+    const selectedPlanContent = document.createElement('div');
+    selectedPlanContent.innerHTML = `
+      <h3>${planName}</h3>
+      <p>${planPrice}</p>
+      <p>${planResolution}</p>
+    `;
+
+    selectedPlan.appendChild(selectedPlanContent);
+  });
+});
+    </script>
+ 
+    
+</body>
+
+</body>
+</html>

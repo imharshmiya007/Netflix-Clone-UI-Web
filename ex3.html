@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <div id="countdown"></div>
+    <button id="newButton">Start Countdown</button>
+
+    <script>
+        // Set the countdown time to 15 minutes (15 * 60 seconds)
+        var countdownTime = 10 * 60;
+        var timer; // Variable to store the timer
+
+        // Function to update the countdown timer
+        function updateCountdown() {
+            var countdownElement = document.getElementById("countdown");
+
+            // Calculate minutes and seconds
+            var minutes = Math.floor(countdownTime / 60);
+            var seconds = countdownTime % 60;
+
+            // Format minutes and seconds with leading zeros if necessary
+            var formattedMinutes = String(minutes).padStart(2, '0');
+            var formattedSeconds = String(seconds).padStart(2, '0');
+
+            // Update the countdown display
+            countdownElement.innerHTML = "Countdown: " + formattedMinutes + ":" + formattedSeconds;
+
+            // Decrease the countdown time by 1 second
+            countdownTime--;
+
+            // If countdown reaches zero, stop the timer and redirect to a new page
+            if (countdownTime < 0) {
+                clearInterval(timer); // Stop the timer
+                window.location.href = "sign-in-code.html"; // Redirect to the new page
+            }
+        }
+
+        // Function to start the countdown
+        function startCountdown() {
+            updateCountdown(); // Initial update
+
+            // Update the countdown every second
+            timer = setInterval(updateCountdown, 1000);
+            
+            // Disable the button once countdown starts
+            document.getElementById("newButton").disabled = true;
+        }
+
+        // Event listener for the button click
+        document.getElementById("newButton").addEventListener("click", startCountdown);
+    </script>
+</body>
+</html>
